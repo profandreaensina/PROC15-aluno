@@ -33,9 +33,7 @@ function preload(){
   imgRestart = loadImage("restart.png");
   imgGameOver = loadImage("gameOver.png");
   
-  somSalto = loadSound("jump.mp3");
-  somColisao = loadSound("die.mp3");
-  somPontos = loadSound("checkPoint.mp3");
+  // 01. carregar sons do jogo
 }
 
 function setup() {
@@ -62,14 +60,11 @@ function setup() {
   soloInvisivel = createSprite(200,190,400,10);
   soloInvisivel.visible = false;
   
-  //criar Grupos de Obstáculos e Nuvens
   grupoCactos = createGroup();
   grupoNuvens = createGroup();
   
-  console.log("Olá" + 5);
-  
   trex.setCollider("circle",0,0,40);
-  trex.debug = true
+  trex.debug = true;
   
   pontos = 0;
   
@@ -78,36 +73,29 @@ function setup() {
 function draw() {
   
   background(180);
-  //exibir pontuação
   text("Pontuação: "+ pontos, 500,50);
   
-  console.log("isto é ",estadoJogo)
+  console.log("O estado de jogo é ", estadoJogo)
   
   
   if(estadoJogo === PLAY){
     gameOver.visible = false
     restart.visible = false
-    //mover o chão
+   
     solo.velocityX = -6;
-    //pontuação
+    
     pontos = pontos + Math.round(frameCount/60);
     
     if (solo.x < 0){
       solo.x = solo.width/2;
     }
-    
-    //pular quando a tecla espaço é pressionada
     if(keyDown("space")&& trex.y >= 145) {
         trex.velocityY = -12;
     }
-    
-    //acrescentar gravidade
+   
     trex.velocityY = trex.velocityY + 0.8
-  
-    //gerar as nuvens
+ 
     gerarNuvens();
-  
-    //gerar obstáculos no chão
     gerarCactos();
     
     if(grupoCactos.isTouching(trex)){
@@ -115,29 +103,23 @@ function draw() {
     }
   }
    else if (estadoJogo === END) {
-      gameOver.visible = true;
-      restart.visible = true;
+      // 02. mudar visibilidade do restart e gameover
      
       solo.velocityX = 0;
       trex.velocityY = 0
      
-      //mudar a animação do trex
       trex.changeAnimation("collided", trex_colidiu);
+
+      grupoCactos.setLifetimeEach(-1);
+      grupoNuvens.setLifetimeEach(-1);
+      
      
-      //definir tempo de vida dos objetos do jogo para que eles nunca sejam destruídos
-    grupoCactos.setLifetimeEach(-1);
-    grupoNuvens.setLifetimeEach(-1);
-     
-     grupoCactos.setVelocityXEach(0);
-     grupoNuvens.setVelocityXEach(0);
+     // 03. mudar velocidade dos cactos e nuvens
+      grupoCactos.setVelocityXEach(    );
+      grupoNuvens.setVelocityXEach(    );
    }
-  
- 
-  //impedir que trex caia
+
   trex.collide(soloInvisivel);
-  
-  
-  
   drawSprites();
 }
 
@@ -145,8 +127,6 @@ function gerarCactos(){
  if (frameCount % 60 === 0){
    var cacto = createSprite(610,165,10,40);
    cacto.velocityX = -6;
-   
-    //gerar obstáculos aleatórios
     var rand = Math.round(random(1,6));
     switch(rand) {
       case 1: cacto.addImage(cacto1);
@@ -163,18 +143,16 @@ function gerarCactos(){
               break;
       default: break;
     }
-   
-    //atribuir dimensão e tempo de vida ao obstáculo           
+             
     cacto.scale = 0.5;
     cacto.lifetime = 300;
-   
-   //adicionar cada obstáculo ao grupo
+
     grupoCactos.add(cacto);
  }
 }
 
 function gerarNuvens() {
-  //escreva o código aqui para gerar as nuvens
+
   if (frameCount % 60 === 0) {
     var nuvem = createSprite(600,100,40,10);
     nuvem.y = Math.round(random(70,150));
@@ -182,14 +160,11 @@ function gerarNuvens() {
     nuvem.scale = 0.5;
     nuvem.velocityX = -3;
     
-     //atribua tempo de vida à variável
     nuvem.lifetime = 210;
     
-    //ajuste a profundidade
     nuvem.depth = trex.depth;
     trex.depth = trex.depth + 1;
-    
-    //adicionar nuvens ao grupo
+  
     grupoNuvens.add(nuvem);
     }
 }
