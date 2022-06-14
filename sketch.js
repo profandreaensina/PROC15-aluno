@@ -16,7 +16,7 @@ var somSalto, somPontos, somColisao;
 
 
 function preload(){
-  trex_correndo = loadAnimation("trex1.png","trex3.png","trex4.png");
+  trex_correndo = loadAnimation("trex1.png","trex2.png","trex3.png");
   trex_colidiu = loadAnimation("trex_collided.png");
   
   imagemSolo = loadImage("ground2.png");
@@ -66,8 +66,10 @@ function setup() {
   grupoCactos = createGroup();
   grupoNuvens = createGroup();
   
+  console.log("Olá" + 5);
+  
   trex.setCollider("circle",0,0,40);
-  trex.debug = true;
+  trex.debug = true
   
   pontos = 0;
   
@@ -86,7 +88,7 @@ function draw() {
     gameOver.visible = false
     restart.visible = false
     //mover o chão
-    solo.velocityX = -4;
+    solo.velocityX = -6;
     //pontuação
     pontos = pontos + Math.round(frameCount/60);
     
@@ -95,7 +97,7 @@ function draw() {
     }
     
     //pular quando a tecla espaço é pressionada
-    if(keyDown("space")&& trex.y >= 100) {
+    if(keyDown("space")&& trex.y >= 145) {
         trex.velocityY = -12;
     }
     
@@ -113,7 +115,6 @@ function draw() {
     }
   }
    else if (estadoJogo === END) {
-     console.log("oi")
       gameOver.visible = true;
       restart.visible = true;
      
@@ -142,7 +143,7 @@ function draw() {
 
 function gerarCactos(){
  if (frameCount % 60 === 0){
-   var cacto = createSprite(400,165,10,40);
+   var cacto = createSprite(610,165,10,40);
    cacto.velocityX = -6;
    
     //gerar obstáculos aleatórios
@@ -176,13 +177,13 @@ function gerarNuvens() {
   //escreva o código aqui para gerar as nuvens
   if (frameCount % 60 === 0) {
     var nuvem = createSprite(600,100,40,10);
-    nuvem.y = Math.round(random(10,60));
+    nuvem.y = Math.round(random(70,150));
     nuvem.addImage(imagemNuvem);
     nuvem.scale = 0.5;
     nuvem.velocityX = -3;
     
      //atribua tempo de vida à variável
-    nuvem.lifetime = 134;
+    nuvem.lifetime = 210;
     
     //ajuste a profundidade
     nuvem.depth = trex.depth;
