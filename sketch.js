@@ -71,7 +71,7 @@ function draw() {
     }
     
     //pular quando a tecla de espaço for pressionada
-    if(keyDown("space")&& trex.y >= 100) {
+    if(keyDown("space")&& trex.y >= 140) {
         trex.velocityY = -13;
     }
     
