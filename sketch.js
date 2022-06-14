@@ -15,7 +15,7 @@ var somSalto , somPontos, somColisao;
 
 
 function preload(){
-  trex_correndo = loadAnimation("trex1.png","trex3.png","trex4.png");
+  trex_correndo = loadAnimation("trex1.png","trex2.png","trex3.png");
   trex_colidiu = loadAnimation("trex_collided.png");
   
   imagemSolo = loadImage("ground2.png");
