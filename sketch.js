@@ -66,10 +66,8 @@ function setup() {
   grupoCactos = createGroup();
   grupoNuvens = createGroup();
   
-  console.log("Olá" + 5);
-  
   trex.setCollider("circle",0,0,40);
-  trex.debug = true
+  trex.debug = true;
   
   pontos = 0;
   
