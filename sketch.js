@@ -30,12 +30,12 @@ function preload(){
   cacto5 = loadImage("obstacle5.png");
   cacto6 = loadImage("obstacle6.png");
   
-  imgRestart = loadImage("restart.png")
-  imgGameOver = loadImage("gameOver.png")
+  imgRestart = loadImage("restart.png");
+  imgGameOver = loadImage("gameOver.png");
   
-  somSalto = loadSound("jump.mp3")
-  somColisao = loadSound("die.mp3")
-  somPontos = loadSound("checkPoint.mp3")
+  somSalto = loadSound("jump.mp3");
+  somColisao = loadSound("die.mp3");
+  somPontos = loadSound("checkPoint.mp3");
 }
 
 function setup() {
